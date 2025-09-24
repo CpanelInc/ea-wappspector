@@ -12,6 +12,9 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 Source0:        v%{version}.tar.gz
 Source1:        composer-installer.php
+Source2:        pkg.ea-wappspector.postinst
+Source3:        pkg.ea-wappspector.prerm
+Source4:        pkg.ea-wappspector.postrm
 
 Requires:       ea-php-cli
 
@@ -27,61 +30,23 @@ cp %{SOURCE1} composer-installer.php
 echo "Source prepared for installation"
 
 %install
-mkdir -p %{buildroot}/usr/local/cpanel/bin
+mkdir -p %{buildroot}/usr/local/bin
 mkdir -p %{buildroot}/usr/local/cpanel/share/wappspector
 
 # Copy all source files to share directory
 cp -r . %{buildroot}/usr/local/cpanel/share/wappspector/
 
 %post
-echo "Building wappspector PHAR..."
 
-cd /usr/local/cpanel/share/wappspector
-
-# Install composer
-/usr/local/cpanel/3rdparty/bin/php composer-installer.php
-
-# Install dependencies
-/usr/local/cpanel/3rdparty/bin/php composer.phar require clue/phar-composer
-/usr/local/cpanel/3rdparty/bin/php composer.phar install
-
-# Install phar-composer
-/usr/local/cpanel/3rdparty/bin/php ./composer global require clue/phar-composer
-
-# Build wappspector.phar
-/usr/local/cpanel/3rdparty/bin/php -d phar.readonly=off vendor/bin/phar-composer build .
-
-# Create wrapper script that uses cpanel php
-cat > /usr/local/bin/ea-wappspector << 'EOF'
-#!/bin/bash
-exec /usr/local/cpanel/3rdparty/bin/php /usr/local/cpanel/share/wappspector/wappspector.phar "$@"
-EOF
-
-chmod 755 /usr/local/bin/ea-wappspector
-
-echo "wappspector installation complete!"
+%include %{SOURCE2}
 
 %preun
-echo "Cleaning up wappspector files..."
 
-# Remove the wrapper script
-rm -f /usr/local/bin/ea-wappspector
-
-# Remove build artifacts that weren't tracked by RPM
-if [ -d "/usr/local/cpanel/share/wappspector" ]; then
-    rm -rf /usr/local/cpanel/share/wappspector/.composer
-    rm -f /usr/local/cpanel/share/wappspector/composer.phar
-    rm -f /usr/local/cpanel/share/wappspector/composer.lock
-    rm -rf /usr/local/cpanel/share/wappspector/vendor
-    rm -f /usr/local/cpanel/share/wappspector/wappspector.phar
-fi
+%include %{SOURCE3}
 
 %postun
-# Remove the directory if it's empty after RPM removes the tracked files
-if [ -d "/usr/local/cpanel/share/wappspector" ]; then
-    rmdir /usr/local/cpanel/share/wappspector
-    echo "Removed empty wappspector directory"
-fi
+
+%include %{SOURCE4}
 
 %clean
 rm -rf %{buildroot}
