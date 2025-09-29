@@ -1,0 +1,25 @@
+#!/bin/bash
+
+echo "Building wappspector PHAR..."
+
+cd /usr/local/cpanel/share/wappspector
+
+# Install composer
+/usr/local/cpanel/3rdparty/bin/php composer-installer.php
+
+# Install dependencies
+/usr/local/cpanel/3rdparty/bin/php composer.phar require clue/phar-composer --no-interaction
+/usr/local/cpanel/3rdparty/bin/php composer.phar install --no-interaction
+
+# Build wappspector.phar
+/usr/local/cpanel/3rdparty/bin/php -d phar.readonly=off vendor/bin/phar-composer build .
+
+# Create wrapper script that uses cpanel php
+cat > /usr/local/bin/ea-wappspector << 'EOF'
+#!/bin/bash
+exec /usr/local/cpanel/3rdparty/bin/php /usr/local/cpanel/share/wappspector/wappspector.phar "$@"
+EOF
+
+chmod 755 /usr/local/bin/ea-wappspector
+
+echo "wappspector installation complete!"
