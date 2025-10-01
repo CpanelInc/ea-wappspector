@@ -4,6 +4,8 @@ echo "Building wappspector PHAR..."
 
 cd /usr/local/cpanel/share/wappspector
 
+export COMPOSER_ALLOW_SUPERUSER=1
+
 # Install composer
 /usr/local/cpanel/3rdparty/bin/php composer-installer.php
 
@@ -21,5 +23,7 @@ exec /usr/local/cpanel/3rdparty/bin/php /usr/local/cpanel/share/wappspector/wapp
 EOF
 
 chmod 755 /usr/local/bin/ea-wappspector
+
+unset COMPOSER_ALLOW_SUPERUSER
 
 echo "wappspector installation complete!"
