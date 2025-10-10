@@ -2,7 +2,7 @@
 
 echo "Building wappspector PHAR..."
 
-cd /var/cpanel/wappspector
+cd /opt/cpanel/ea-wappspector
 
 export COMPOSER_ALLOW_SUPERUSER=1
 
@@ -15,14 +15,6 @@ export COMPOSER_ALLOW_SUPERUSER=1
 
 # Build wappspector.phar
 /usr/local/cpanel/3rdparty/bin/php -d phar.readonly=off vendor/bin/phar-composer build .
-
-# Create wrapper script that uses cpanel php
-cat > /usr/local/bin/ea-wappspector << 'EOF'
-#!/bin/bash
-exec /usr/local/cpanel/3rdparty/bin/php /var/cpanel/wappspector/wappspector.phar "$@"
-EOF
-
-chmod 755 /usr/local/bin/ea-wappspector
 
 unset COMPOSER_ALLOW_SUPERUSER
 

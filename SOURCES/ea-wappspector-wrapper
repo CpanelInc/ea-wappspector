@@ -1,0 +1,2 @@
+#!/bin/bash
+exec /usr/local/cpanel/3rdparty/bin/php /opt/cpanel/ea-wappspector/wappspector.phar "$@"

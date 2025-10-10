@@ -15,6 +15,7 @@ Source1:        composer-installer.php
 Source2:        pkg.ea-wappspector.postinst
 Source3:        pkg.ea-wappspector.prerm
 Source4:        pkg.ea-wappspector.postrm
+Source5:        ea-wappspector-wrapper
 
 Requires:       ea-php-cli
 
@@ -24,6 +25,7 @@ Command-line interface utility to analyze the file structure of a web hosting se
 %prep
 %setup -q -n wappspector-%{version}
 cp %{SOURCE1} composer-installer.php
+cp %{SOURCE5} ea-wappspector-wrapper
 
 %build
 # No build steps - everything happens during package installation
@@ -31,10 +33,13 @@ echo "Source prepared for installation"
 
 %install
 mkdir -p %{buildroot}/usr/local/bin
-mkdir -p %{buildroot}/var/cpanel/wappspector
+mkdir -p %{buildroot}/opt/cpanel/ea-wappspector
 
 # Copy all source files to wappspector directory
-cp -r . %{buildroot}/var/cpanel/wappspector
+cp -r . %{buildroot}/opt/cpanel/ea-wappspector
+
+cp ea-wappspector-wrapper %{buildroot}/usr/local/bin/ea-wappspector
+chmod 755 %{buildroot}/usr/local/bin/ea-wappspector
 
 %post
 
@@ -53,7 +58,8 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-/var/cpanel/wappspector
+/opt/cpanel/ea-wappspector
+/usr/local/bin/ea-wappspector
 
 %changelog
 * Tue Sep 16 2025 Brian Mendoza <brian.mendoza@cpanel.net> - 0.2.8-1

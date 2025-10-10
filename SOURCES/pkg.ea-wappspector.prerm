@@ -2,14 +2,11 @@
 
 echo "Cleaning up wappspector files..."
 
-# Remove the wrapper script
-rm -f /usr/local/bin/ea-wappspector
-
 # Remove build artifacts that weren't tracked by RPM
-if [ -d "/var/cpanel/wappspector" ]; then
-    rm -rf /var/cpanel/wappspector/.composer
-    rm -f /var/cpanel/wappspector/composer.phar
-    rm -f /var/cpanel/wappspector/composer.lock
-    rm -rf /var/cpanel/wappspector/vendor
-    rm -f /var/cpanel/wappspector/wappspector.phar
+if [ -d "/opt/cpanel/ea-wappspector" ]; then
+    rm -rf /opt/cpanel/ea-wappspector/.composer
+    rm -f /opt/cpanel/ea-wappspector/composer.phar
+    rm -f /opt/cpanel/ea-wappspector/composer.lock
+    rm -rf /opt/cpanel/ea-wappspector/vendor
+    rm -f /opt/cpanel/ea-wappspector/wappspector.phar
 fi
