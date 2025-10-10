@@ -31,10 +31,10 @@ echo "Source prepared for installation"
 
 %install
 mkdir -p %{buildroot}/usr/local/bin
-mkdir -p %{buildroot}/usr/local/cpanel/share/wappspector
+mkdir -p %{buildroot}/var/cpanel/wappspector
 
-# Copy all source files to share directory
-cp -r . %{buildroot}/usr/local/cpanel/share/wappspector/
+# Copy all source files to wappspector directory
+cp -r . %{buildroot}/var/cpanel/wappspector
 
 %post
 
@@ -53,7 +53,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-/usr/local/cpanel/share/wappspector
+/var/cpanel/wappspector
 
 %changelog
 * Tue Sep 16 2025 Brian Mendoza <brian.mendoza@cpanel.net> - 0.2.8-1
