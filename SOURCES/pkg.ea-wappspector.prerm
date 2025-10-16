@@ -1,12 +1,14 @@
 #!/bin/bash
 
-echo "Cleaning up wappspector files..."
-
-# Remove build artifacts that weren't tracked by RPM
-if [ -d "/opt/cpanel/ea-wappspector" ]; then
-    rm -rf /opt/cpanel/ea-wappspector/.composer
-    rm -f /opt/cpanel/ea-wappspector/composer.phar
-    rm -f /opt/cpanel/ea-wappspector/composer.lock
-    rm -rf /opt/cpanel/ea-wappspector/vendor
-    rm -f /opt/cpanel/ea-wappspector/wappspector.phar
+# Only clean up untracked files after actual removal, not upgrade
+if [ "$1" = "0" ]; then
+    echo "Cleaning up remaining wappspector artifacts..."
+    
+    if [ -d "/usr/local/cpanel/share/wappspector" ]; then
+        rm -rf /usr/local/cpanel/share/wappspector/.composer
+        rm -rf /usr/local/cpanel/share/wappspector/vendor
+        rm -f /usr/local/cpanel/share/wappspector/composer.phar
+        rm -f /usr/local/cpanel/share/wappspector/composer.lock
+        rm -f /usr/local/cpanel/share/wappspector/wappspector.phar
+    fi
 fi

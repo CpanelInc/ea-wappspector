@@ -32,14 +32,14 @@ cp %{SOURCE5} ea-wappspector-wrapper
 echo "Source prepared for installation"
 
 %install
-mkdir -p %{buildroot}/usr/local/bin
+mkdir -p %{buildroot}/usr/bin
 mkdir -p %{buildroot}/opt/cpanel/ea-wappspector
 
 # Copy all source files to wappspector directory
 cp -r . %{buildroot}/opt/cpanel/ea-wappspector
 
-cp ea-wappspector-wrapper %{buildroot}/usr/local/bin/ea-wappspector
-chmod 755 %{buildroot}/usr/local/bin/ea-wappspector
+cp ea-wappspector-wrapper %{buildroot}/usr/bin/ea-wappspector
+chmod 755 %{buildroot}/usr/bin/ea-wappspector
 
 %post
 
@@ -59,7 +59,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 /opt/cpanel/ea-wappspector
-/usr/local/bin/ea-wappspector
+/usr/bin/ea-wappspector
 
 %changelog
 * Thu Oct 16 2025 Brian Mendoza <brian.mendoza@cpanel.net> - 0.2.8-2
