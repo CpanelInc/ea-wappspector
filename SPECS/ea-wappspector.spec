@@ -1,7 +1,7 @@
 Name:           ea-wappspector
 Version:        0.2.8
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4552 for more details
-%define release_prefix 1
+%define release_prefix 2
 Release:        %{release_prefix}%{?dist}.cpanel
 Summary:        Tool for analyzing web frameworks used in hosted websites
 License:        GPL
@@ -62,5 +62,8 @@ rm -rf %{buildroot}
 /usr/local/bin/ea-wappspector
 
 %changelog
+* Thu Oct 16 2025 Brian Mendoza <brian.mendoza@cpanel.net> - 0.2.8-2
+- EA4-153: Bump version to fix issues
+
 * Tue Sep 16 2025 Brian Mendoza <brian.mendoza@cpanel.net> - 0.2.8-1
 - EA4-110: Initial version
