@@ -1,6 +1,0 @@
-#!/bin/bash
-
-if [ -d "/opt/cpanel/ea-wappspector" ]; then
-    rm -rf /opt/cpanel/ea-wappspector
-    echo "Removed wappspector directory"
-fi

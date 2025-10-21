@@ -14,7 +14,6 @@ Source0:        v%{version}.tar.gz
 Source1:        composer-installer.php
 Source2:        pkg.ea-wappspector.postinst
 Source3:        pkg.ea-wappspector.prerm
-Source4:        pkg.ea-wappspector.postrm
 Source5:        ea-wappspector-wrapper
 
 Requires:       ea-php-cli
@@ -48,10 +47,6 @@ chmod 755 %{buildroot}/usr/bin/ea-wappspector
 %preun
 
 %include %{SOURCE3}
-
-%postun
-
-%include %{SOURCE4}
 
 %clean
 rm -rf %{buildroot}

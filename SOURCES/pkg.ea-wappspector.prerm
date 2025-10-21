@@ -4,11 +4,11 @@
 if [ "$1" = "0" ]; then
     echo "Cleaning up remaining wappspector artifacts..."
     
-    if [ -d "/usr/local/cpanel/share/wappspector" ]; then
-        rm -rf /usr/local/cpanel/share/wappspector/.composer
-        rm -rf /usr/local/cpanel/share/wappspector/vendor
-        rm -f /usr/local/cpanel/share/wappspector/composer.phar
-        rm -f /usr/local/cpanel/share/wappspector/composer.lock
-        rm -f /usr/local/cpanel/share/wappspector/wappspector.phar
+    if [ -d "/opt/cpanel/ea-wappspector" ]; then
+        rm -rf /opt/cpanel/ea-wappspector/.composer
+        rm -rf /opt/cpanel/ea-wappspector/vendor
+        rm -f /opt/cpanel/ea-wappspector/composer.phar
+        rm -f /opt/cpanel/ea-wappspector/composer.lock
+        rm -f /opt/cpanel/ea-wappspector/wappspector.phar
     fi
 fi
