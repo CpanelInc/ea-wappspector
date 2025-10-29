@@ -1,6 +1,0 @@
-#!/bin/bash
-
-if [ -d "/usr/local/cpanel/share/wappspector" ]; then
-    rmdir /usr/local/cpanel/share/wappspector
-    echo "Removed wappspector directory"
-fi
