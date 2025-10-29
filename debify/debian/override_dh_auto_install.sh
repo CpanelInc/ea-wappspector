@@ -4,16 +4,20 @@ source debian/vars.sh
 
 set -x
 
-mkdir -p $DEB_INSTALL_ROOT/usr/local/cpanel/share/wappspector
+mkdir -p $DEB_INSTALL_ROOT/opt/cpanel/ea-wappspector
+mkdir -p $DEB_INSTALL_ROOT/usr/bin
 
-cp LICENSE $DEB_INSTALL_ROOT/usr/local/cpanel/share/wappspector/
-cp README.md $DEB_INSTALL_ROOT/usr/local/cpanel/share/wappspector/
-cp composer.json $DEB_INSTALL_ROOT/usr/local/cpanel/share/wappspector/
-cp -r bin $DEB_INSTALL_ROOT/usr/local/cpanel/share/wappspector/
-cp -r src $DEB_INSTALL_ROOT/usr/local/cpanel/share/wappspector/
-cp -r .github $DEB_INSTALL_ROOT/usr/local/cpanel/share/wappspector/
+cp LICENSE $DEB_INSTALL_ROOT/opt/cpanel/ea-wappspector
+cp README.md $DEB_INSTALL_ROOT/opt/cpanel/ea-wappspector
+cp composer.json $DEB_INSTALL_ROOT/opt/cpanel/ea-wappspector
+cp ea-wappspector-wrapper $DEB_INSTALL_ROOT/opt/cpanel/ea-wappspector
+cp -r bin $DEB_INSTALL_ROOT/opt/cpanel/ea-wappspector
+cp -r src $DEB_INSTALL_ROOT/opt/cpanel/ea-wappspector
+cp -r .github $DEB_INSTALL_ROOT/opt/cpanel/ea-wappspector
 
-cp $SOURCE1 $DEB_INSTALL_ROOT/usr/local/cpanel/share/wappspector/composer-installer.php
+cp $SOURCE1 $DEB_INSTALL_ROOT/opt/cpanel/ea-wappspector/composer-installer.php
+cp $SOURCE5 $DEB_INSTALL_ROOT/usr/bin/ea-wappspector
+chmod 755 $DEB_INSTALL_ROOT/usr/bin/ea-wappspector
 
 echo "Files copied to install root:"
 find $DEB_INSTALL_ROOT -type f | head -20
