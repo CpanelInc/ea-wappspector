@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Temporary while we clean up the mess in the original version (Ubuntu)
+# New install dir is now in #files under /opt/cpanel/ea-wappspector
+if [ -d "/usr/local/cpanel/share/wappspector" ]; then
+    rm -rf /usr/local/cpanel/share/wappspector
+fi
